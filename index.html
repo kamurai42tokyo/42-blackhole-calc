@@ -287,7 +287,7 @@ body{color:var(--text); font-family:var(--display); font-weight:300; line-height
     var dateOf = function(p,m){ return add(kickoff, PACE_DAYS[p][m] + frz); };
     var now = today();
 
-    var bh   = dateOf(FINAL, ms);
+    var bh   = pace === FINAL ? dateOf(FINAL, ms) : add(dateOf(22, ms), 30);
     var left = Math.round((bh - now)/DAY);
 
     if(left < 0){
@@ -308,7 +308,7 @@ body{color:var(--text); font-family:var(--display); font-weight:300; line-height
 
     el.ladder.innerHTML = "";
     PACES.forEach(function(p){
-      var d = dateOf(p, ms), passed = raw(p, ms) < now;
+      var d = p===FINAL ? bh : dateOf(p, ms), passed = raw(p, ms) < now;
       var node = document.createElement("div");
       node.className = "rung" + (p===pace ? " current" : "") + (p===FINAL ? " terminal" : "")
                      + (passed && p!==pace ? " passed" : "");
