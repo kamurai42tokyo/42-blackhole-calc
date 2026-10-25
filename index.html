@@ -186,7 +186,7 @@ body{color:var(--text); font-family:var(--display); font-weight:300; line-height
     <h2>前提と注意</h2>
     <p class="warn-note">実際のBlack Holeはここに出る日付より早いと想定してください。数字は目安であって、公式の通知ではありません。</p>
     <ol>
-      <li><strong>「Black Hole＝ペース24の期日」は推定です。</strong>ペース表にこれ以降のペースが存在しないことからの推論で、公式に確認したものではありません。</li>
+      <li><strong>Black Holeは「ペース22の期日＋30日」として計算しています。</strong>現在のペースが24の場合は、入力した期日をそのままBlack Holeとします。公式に確認したものではありません。</li>
       <li><strong>「フリーズ1日＝期日1日後ろ倒し」も推定です。</strong>42 APIではフリーズ（Anti-Grav Unit）のデータがstaff権限を要求するため、外部からは検証できません。</li>
       <li>すでに消化したフリーズは、入力した期日から逆算するkickoffに吸収されます。入力するのは<strong>今後の予定分だけ</strong>です。</li>
       <li>日数表は42東京の資料に基づきますが、<strong>カリキュラム改定で変わり得ます</strong>。</li>
@@ -301,7 +301,8 @@ body{color:var(--text); font-family:var(--display); font-weight:300; line-height
       el.unit.textContent = "日後";
     }
     el.bhDate.textContent = dotted(bh);
-    el.bhNote.textContent = "ペース"+FINAL+" · Milestone "+ms + (frz ? " · フリーズ"+frz+"日を加算" : "");
+    el.bhNote.textContent = (pace === FINAL ? "ペース"+FINAL+"の期日" : "ペース22の期日+30日")
+      + " · Milestone "+ms + (frz ? " · フリーズ"+frz+"日を加算" : "");
 
     el.kick.textContent = "逆算した実効kickoff: "+full(kickoff)
       + " — 実際の入学日と大きくずれる場合、消化済みフリーズがその差にあたります。";
